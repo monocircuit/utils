@@ -14,3 +14,5 @@ export { default as Comparator } from "./others/Comparator/Comparator";
 
 export { default as LinkedList } from "./structures/LinkedList/LinkedList";
 export { default as LinkedListNode } from "./structures/LinkedList/LinkedListNode";
+export { default as Stack } from "./structures/Stack/Stack";
+export { default as Queue } from "./structures/Queue/Queue";
