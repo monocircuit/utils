@@ -110,7 +110,7 @@ class Stack<D extends unknown = number> {
      * @returns An array containing the elements of the `Stack`
      */
     toArray(): D[] {
-        return this.#__linkedList.toArray().map(Node => Node.data);
+        return this.#__linkedList.toArray().map(node => node.data);
     }
 
     /**
