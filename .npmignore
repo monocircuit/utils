@@ -4,11 +4,18 @@
 # Ignore compilation configuration files
 tsconfig.json
 webpack.config.js
+webpack.compiler.js
+
+# Ignore linting configuration files
+.eslintrc.json
+.prettierrc.json
+dev.tsconfig.json
 
 # Ignore source directory
 src/
 
 # Ignore git config files
+.github/
 .gitignore
 
 # Ignore development assets
