@@ -1,9 +1,9 @@
 {
     "name": "@monocircuit/utils",
-    "version": "1.1.2",
+    "version": "1.1.4",
     "description": "A repository that contains data structures, algorithms and more.",
-    "main": "lib/utils.js",
-    "typings": "lib/@types",
+    "main": "lib/main.js",
+    "typings": "lib/main.d.ts",
     "scripts": {
         "start": "node webpack.compiler.js",
         "build": "npm run clean && webpack --config-name utils/production",

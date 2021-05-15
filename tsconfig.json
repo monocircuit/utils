@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "umd",
         "target": "ES2015",
         "lib": ["ES2015", "DOM"],
-        "outDir": "lib/@types",
+        "outDir": "lib",
         "typeRoots": ["node_modules/@types"],
         "sourceMap": true,
         "declaration": true

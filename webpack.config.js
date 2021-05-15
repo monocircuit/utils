@@ -20,7 +20,7 @@ module.exports = [
         },
         output: {
             path: path.resolve(__dirname, "dist"),
-            filename: "utils.js",
+            filename: "main.js",
         },
         module: {
             rules: [
@@ -67,8 +67,8 @@ module.exports = [
         target: "node",
         devtool: "source-map",
         entry: {
-            utils: path.resolve(__dirname, "./src/main.ts"),
-            "utils.min": path.resolve(__dirname, "./src/main.ts"),
+            main: path.resolve(__dirname, "./src/main.ts"),
+            "main.min": path.resolve(__dirname, "./src/main.ts"),
         },
         output: {
             path: path.resolve(__dirname, "lib"),
