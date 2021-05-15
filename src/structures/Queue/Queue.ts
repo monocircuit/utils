@@ -82,9 +82,12 @@ class Queue<D extends unknown = number> {
      * Adds a new element with some data to the end of the `Queue`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
+     * @param data A piece of data that will be held by the element in the `Queue`
      */
-    enqueue(data: D): void {
+    enqueue(data: D): this {
         this.#__linkedList.append(data);
+
+        return this;
     }
 
     /**
@@ -115,6 +118,7 @@ class Queue<D extends unknown = number> {
      * Converts the `Queue` to string.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
+     * @param callback A function that will handle the stringification
      * @returns A string containg the stringified data of the queue's elements.
      */
     toString(callback?: (data: D) => string): string {

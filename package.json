@@ -6,6 +6,7 @@
     "typings": "lib/main.d.ts",
     "scripts": {
         "start": "node webpack.compiler.js",
+        "test": "jest",
         "build": "npm run clean && webpack --config-name utils/production",
         "clean": "shx rm -rf lib dist"
     },
@@ -35,6 +36,7 @@
         "@babel/plugin-transform-typescript": "^7.13.0",
         "@babel/preset-env": "^7.14.2",
         "@babel/preset-typescript": "^7.13.0",
+        "@types/jest": "^26.0.23",
         "@typescript-eslint/eslint-plugin": "^4.23.0",
         "@typescript-eslint/parser": "^4.23.0",
         "awesome-typescript-loader": "^5.2.1",
@@ -45,6 +47,7 @@
         "eslint-config-google": "^0.14.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^3.4.0",
+        "jest": "^26.6.3",
         "prettier": "^2.3.0",
         "shx": "^0.3.3",
         "ts-loader": "^9.1.2",

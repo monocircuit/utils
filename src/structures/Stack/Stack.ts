@@ -82,9 +82,13 @@ class Stack<D extends unknown = number> {
      * Adds a new element with some data to the top of the `Stack`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
+     * @param data A piece of data that will be held by the element on the `Stack`
+     * @returns The `Stack` instance
      */
-    push(data: D): void {
+    push(data: D): this {
         this.#__linkedList.prepend(data);
+
+        return this;
     }
 
     /**
@@ -113,6 +117,7 @@ class Stack<D extends unknown = number> {
      * Converts the `Stack` to string.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
+     * @param callback A function that will handle the stringification
      * @returns A string containg the stringified data of the stack's elements.
      */
     toString(callback?: (data: D) => string): string {
