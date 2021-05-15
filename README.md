@@ -24,7 +24,8 @@ codebase_ for lines that have the <u>high potential</u> to be rewritten very oft
 
 ### Data Structures
 
--   🔗 `LinkedList` & `LinkedListNode`
+-   🔘 `Node`
+-   🔗 `LinkedList`
 -   📚 `Stack`
 -   🐍 `Queue`
 
