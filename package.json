@@ -1,13 +1,14 @@
 {
     "name": "@monocircuit/utils",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "A repository that contains data structures, algorithms and more.",
     "main": "lib/utils.js",
     "typings": "lib/@types",
     "scripts": {
         "start": "node webpack.compiler.js",
         "build": "npm run clean && webpack --config-name utils/production",
-        "clean": "shx rm -rf lib dist"
+        "clean": "shx rm -rf lib dist",
+        "publish": "npm publish --access=public"
     },
     "keywords": [
         "utils",
