@@ -1,0 +1,89 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": ["google", "plugin:prettier/recommended"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "plugins": ["@typescript-eslint", "prettier"],
+    "rules": {
+        "valid-jsdoc": "off",
+        "require-jsdoc": "off",
+        "@typescript-eslint/naming-convention": [
+            "warn",
+            {
+                "selector": "default",
+                "format": ["camelCase"]
+            },
+            {
+                "selector": "objectLiteralProperty",
+                "format": ["camelCase"]
+            },
+            {
+                "selector": "typeLike",
+                "format": ["PascalCase"]
+            },
+            {
+                "selector": "typeProperty",
+                "format": ["camelCase"],
+                "leadingUnderscore": "allowSingleOrDouble"
+            },
+            {
+                "selector": "class",
+                "format": ["PascalCase"],
+                "leadingUnderscore": "require"
+            },
+            {
+                "selector": "class",
+                "format": ["PascalCase"],
+                "modifiers": ["exported"],
+                "leadingUnderscore": "forbid"
+            },
+            {
+                "selector": "variableLike",
+                "modifiers": ["unused"],
+                "format": ["camelCase"],
+                "leadingUnderscore": "require"
+            },
+            {
+                "selector": "variable",
+                "types": ["function"],
+                "format": ["camelCase"]
+            },
+            {
+                "selector": "method",
+                "format": ["camelCase"],
+                "modifiers": ["private"],
+                "leadingUnderscore": "requireDouble"
+            },
+            {
+                "selector": "classProperty",
+                "format": ["camelCase"],
+                "modifiers": ["private"],
+                "leadingUnderscore": "requireDouble"
+            },
+            {
+                "selector": "classProperty",
+                "format": ["UPPER_CASE"],
+                "modifiers": ["static"]
+            }
+        ],
+        "prettier/prettier": [
+            "warn",
+            {
+                "printWidth": 100,
+                "tabWidth": 4,
+                "semi": true,
+                "trailingComma": "all",
+                "arrowParens": "avoid",
+                "proseWrap": "always",
+                "endOfLine": "auto"
+            }
+        ]
+    }
+}

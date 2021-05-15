@@ -1,0 +1,17 @@
+{
+    "folders": [
+        {
+            "name": "utils",
+            "path": ".."
+        }
+    ],
+    "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+        },
+        "editor.formatOnSave": true,
+        "eslint.packageManager": "npm",
+        "eslint.validate": ["typescript"]
+    }
+}

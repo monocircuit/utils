@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ES2015",
+        "lib": ["ES2015", "DOM"],
+        "outDir": "lib/@types",
+        "typeRoots": ["node_modules/@types"],
+        "sourceMap": true,
+        "declaration": true
+    },
+    "awesomeTypescriptLoaderOptions": {
+        "useBabel": true,
+        "babelOptions": {
+            "babelrc": false,
+            "presets": ["@babel/preset-env"]
+        },
+        "babelCore": "@babel/core"
+    },
+    "include": ["src/**/*", "webpack.config.js", "webpack.compiler.js", ".eslintrc.json"],
+    "exclude": ["node_modules"]
+}

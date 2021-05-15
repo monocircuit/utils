@@ -1,0 +1,15 @@
+# Ignore Visual Studio Code configuration files
+.vscode/
+
+# Ignore compilation configuration files
+tsconfig.json
+webpack.config.js
+
+# Ignore source directory
+src/
+
+# Ignore git config files
+.gitignore
+
+# Ignore development assets
+dist/

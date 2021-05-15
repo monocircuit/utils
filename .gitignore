@@ -1,0 +1,6 @@
+# Ignores all node_modules, since a package manager is responsible for these
+node_modules/
+
+# Ignores all build files to reduce the size of the repository even more
+lib/
+dist/
