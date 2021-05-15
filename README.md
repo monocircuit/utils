@@ -1,8 +1,10 @@
+<!-- @format -->
+
 # Utils
 
 <p align="center">
-    <a href="https://www.npmjs.com/package/@monociruit/utils" alt="NPM Package">
-        <img src="https://img.shields.io/npm/v/@monociruit/utils"/>
+    <a href="https://www.npmjs.com/package/@monocircuit/utils" alt="NPM Package">
+        <img src="https://img.shields.io/npm/v/@monocircuit/utils"/>
     </a>
     <a href="https://github.com/monocircuit/utils/actions/workflows/main.yml" alt="Build Status">
         <img src="https://img.shields.io/github/workflow/status/monocircuit/utils/CI"/>
