@@ -8,6 +8,7 @@
         "start": "node webpack.compiler.js",
         "test": "jest",
         "build": "npm run clean && webpack --config-name utils/production",
+        "prepublish": "npm run build",
         "clean": "shx rm -rf lib dist"
     },
     "keywords": [
