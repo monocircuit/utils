@@ -37,12 +37,13 @@ class LinkedListNode<D extends unknown> {
     }
 
     /**
-     * Converts the `LinkedListNode()` to a string.
+     * Converts the `LinkedListNode` to a string.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @param callback A function that takes data and converts it to a string
+     * @returns The `LinkedListNode` as a string
      */
-    toString(callback?: (data: D) => string) {
+    toString(callback?: (data: D) => string): string {
         return callback ? callback(this.data) : `${this.data}`;
     }
 }

@@ -5,6 +5,31 @@ import Comparator from "../../others/Comparator/Comparator";
 import { CompareFunction } from "../../others/Comparator/Comparator";
 
 /**
+ * A representation of options that can be passed to the `LinkedList`
+ * constructor.
+ *
+ * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
+ * @param D The type of data that will be stored in the `LinkedList`
+ */
+type LinkedListConstructorOptions<D extends unknown = number> = Partial<{
+    /**
+     * A custom compare function that will be used to make comparisons to the
+     * objects stored in the `LinkedList`.
+     *
+     * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
+     */
+    compareFunction: CompareFunction<D>;
+
+    /**
+     * An array that will be put in the form of a `LinkedList` and used as an
+     * initial value of the instance.
+     *
+     * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
+     */
+    array: Array<D>;
+}>;
+
+/**
  * A linear data structure that is build in a fashion that mostly exposes a
  * BigO notation of `O(n)`
  *
@@ -17,14 +42,22 @@ class LinkedList<D extends unknown = number> {
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      */
-    #__head: LinkedListNode<D> = null;
+    head: LinkedListNode<D> = null;
 
     /**
      * The last node of the `LinkedList()`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      */
-    #__tail: LinkedListNode<D> = null;
+    tail: LinkedListNode<D> = null;
+
+    /**
+     * The internal length counter that will be linked to by the `length` getter
+     * property of `LinkedList`.
+     *
+     * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
+     */
+    #__length = 0;
 
     /**
      * The `Comparator()` instance that powers all comparison tasks of this
@@ -38,8 +71,32 @@ class LinkedList<D extends unknown = number> {
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @param compareFunction The compare function that will be passed to a `Comparator()`.
      */
-    constructor(compareFunction?: CompareFunction<D>) {
-        this.#__compare = new Comparator(compareFunction);
+    constructor(options?: LinkedListConstructorOptions<D>) {
+        this.#__compare = new Comparator((options ?? {}).compareFunction);
+
+        if (options && options.array) this.fromArray(options.array);
+    }
+
+    /**
+     * The length of the `LinkedList`. Behaves exactly like the `length`
+     * property of an array.
+     *
+     * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
+     */
+    get length(): number {
+        return this.#__length;
+    }
+
+    /**
+     * Checks if the `LinkedList` does not contain any `LinkedListNode`s. In
+     * other words returns a boolean that indicates wether or not the
+     * `LinkedList` is empty.
+     *
+     * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
+     * @returns A boolean that indicates wether or not the `LinkedList` is empty
+     */
+    isEmpty(): boolean {
+        return !this.head;
     }
 
     /**
@@ -48,14 +105,17 @@ class LinkedList<D extends unknown = number> {
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @param data A piece of data that will be held by the `LinkedListNode()`
      * @timecomplexity ``O(1)``
+     * @returns The `LinkedList` instance
      */
-    prepend(data: D) {
-        const newNode = new LinkedListNode(data, this.#__head);
-        this.#__head = newNode;
+    prepend(data: D): this {
+        const newNode = new LinkedListNode(data, this.head);
+        this.head = newNode;
 
-        if (!this.#__tail) {
-            this.#__tail = this.#__head;
+        if (!this.tail) {
+            this.tail = this.head;
         }
+
+        this.#__length++;
 
         return this;
     }
@@ -66,19 +126,22 @@ class LinkedList<D extends unknown = number> {
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @param data A piece of data that will be held by the `LinkedListNode()`
      * @timecomplexity ``O(1)``
+     * @returns The `LinkedList` instance
      */
-    append(data: D) {
+    append(data: D): this {
         const newNode = new LinkedListNode(data);
 
-        if (!this.#__head) {
-            this.#__head = newNode;
-            this.#__tail = newNode;
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
 
             return this;
         }
 
-        this.#__tail.child = newNode;
-        this.#__tail = newNode;
+        this.tail.child = newNode;
+        this.tail = newNode;
+
+        this.#__length++;
 
         return this;
     }
@@ -89,34 +152,41 @@ class LinkedList<D extends unknown = number> {
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @param data A piece of data that the `LinkedListNode()` will be checked against
      * @timecomplexity `O(n)`
+     * @returns The deleted `LinkedListNode`
      */
-    delete(data: D) {
-        if (!this.#__head) {
+    delete(data: D): LinkedListNode<D> {
+        if (!this.head) {
             return null;
         }
 
         let deletedNode = null;
 
-        while (this.#__head && this.#__compare.equalTo(this.#__head.data, data)) {
-            deletedNode = this.#__head;
-            this.#__head = this.#__head.child;
+        while (this.head && this.#__compare.equalTo(this.head.data, data)) {
+            deletedNode = this.head;
+            this.head = this.head.child;
+
+            this.#__length--;
         }
 
-        let currentNode = this.#__head;
+        let currentNode = this.head;
 
         if (currentNode !== null) {
             while (currentNode.child) {
                 if (this.#__compare.equalTo(currentNode.child.data, data)) {
                     deletedNode = currentNode.child;
                     currentNode.child = currentNode.child.child;
+
+                    this.#__length--;
                 } else {
                     currentNode = currentNode.child;
                 }
             }
         }
 
-        if (this.#__compare.equalTo(this.#__tail.data, data)) {
-            this.#__tail = currentNode;
+        if (this.#__compare.equalTo(this.tail.data, data)) {
+            this.tail = currentNode;
+
+            this.#__length--;
         }
 
         return deletedNode;
@@ -129,13 +199,20 @@ class LinkedList<D extends unknown = number> {
      * @param data A piece of data that the `LinkedListNode()` will be checked against
      * @param callback A function that can filter the results
      * @timecomplexity `O(n)`
+     * @returns The seeked data, or if it could not find anything `null`
      */
-    find({ data, callback }: { data: D; callback: (data: D) => boolean }) {
-        if (!this.#__head) {
+    find({
+        data,
+        callback,
+    }: {
+        data: D;
+        callback: (data: D) => boolean;
+    }): LinkedListNode<D> | null | D {
+        if (!this.head) {
             return null;
         }
 
-        let currentNode = this.#__head;
+        let currentNode = this.head;
 
         while (currentNode) {
             if (callback && callback(currentNode.data)) {
@@ -156,19 +233,20 @@ class LinkedList<D extends unknown = number> {
      * Deletes the last node on the `LinkedList()`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
-     * @timecomplexity ``O(n)``
+     * @timecomplexity `O(n)`
+     * @returns The deleted `LinkedListNode`
      */
-    deleteTail() {
-        const deletedTail = this.#__tail;
+    deleteTail(): LinkedListNode<D> {
+        const deletedTail = this.tail;
 
-        if (this.#__head === this.#__tail) {
-            this.#__head = null;
-            this.#__tail = null;
+        if (this.head === this.tail) {
+            this.head = null;
+            this.tail = null;
 
             return deletedTail;
         }
 
-        let currentNode = this.#__head;
+        let currentNode = this.head;
 
         while (currentNode.child) {
             if (!currentNode.child.child) {
@@ -178,7 +256,9 @@ class LinkedList<D extends unknown = number> {
             }
         }
 
-        this.#__tail = currentNode;
+        this.tail = currentNode;
+
+        this.#__length--;
 
         return deletedTail;
     }
@@ -187,21 +267,24 @@ class LinkedList<D extends unknown = number> {
      * Deletes the first node on the `LinkedList()`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
-     * @timecomplexity ``O(1)``
+     * @timecomplexity `O(1)`
+     * @returns The deleted `LinkedListNode`
      */
-    deleteHead() {
-        if (!this.#__head) {
+    deleteHead(): LinkedListNode<D> {
+        if (!this.head) {
             return null;
         }
 
-        const deletedHead = this.#__head;
+        const deletedHead = this.head;
 
-        if (this.#__head.child) {
-            this.#__head = this.#__head.child;
+        if (this.head.child) {
+            this.head = this.head.child;
         } else {
-            this.#__head = null;
-            this.#__tail = null;
+            this.head = null;
+            this.tail = null;
         }
+
+        this.#__length--;
 
         return deletedHead;
     }
@@ -212,8 +295,9 @@ class LinkedList<D extends unknown = number> {
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @param data An array containing the correct type of data
      * @timecomplexity ``O(n)``
+     * @returns The `LinkedList` instance
      */
-    fromArray(data: D[]) {
+    fromArray(data: D[]): this {
         data.forEach(d => this.append(d));
 
         return this;
@@ -224,11 +308,12 @@ class LinkedList<D extends unknown = number> {
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @timecomplexity ``O(n)``
+     * @returns The `LinkedList` as an array
      */
-    toArray() {
+    toArray(): LinkedListNode<D>[] {
         const nodes = [];
 
-        let currentNode = this.#__head;
+        let currentNode = this.head;
 
         while (currentNode) {
             nodes.push(currentNode);
@@ -243,8 +328,9 @@ class LinkedList<D extends unknown = number> {
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @timecomplexity ``O(n)``
+     * @returns The `LinkedList` as a string
      */
-    toString(callback?: (data: D) => string) {
+    toString(callback?: (data: D) => string): string {
         return this.toArray()
             .map(node => node.toString(callback))
             .toString();
@@ -255,9 +341,10 @@ class LinkedList<D extends unknown = number> {
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @timecomplexity ``O(n)``
+     * @returns The `LinkedList` instance
      */
-    reverse() {
-        let currentNode = this.#__head;
+    reverse(): this {
+        let currentNode = this.head;
         let previousNode = null;
         let nextNode = null;
 
@@ -270,8 +357,8 @@ class LinkedList<D extends unknown = number> {
             currentNode = nextNode;
         }
 
-        this.#__tail = this.#__head;
-        this.#__head = previousNode;
+        this.tail = this.head;
+        this.head = previousNode;
 
         return this;
     }
