@@ -1,6 +1,6 @@
 /** @format */
 
-import LinkedListNode from "./LinkedListNode";
+import Node from "../Node/Node";
 import Comparator from "../../others/Comparator/Comparator";
 import { CompareFunction } from "../../others/Comparator/Comparator";
 
@@ -38,18 +38,18 @@ type LinkedListConstructorOptions<D extends unknown = number> = Partial<{
  */
 class LinkedList<D extends unknown = number> {
     /**
-     * The first node of the `LinkedList()`.
+     * The first node of the `LinkedList`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      */
-    head: LinkedListNode<D> = null;
+    head: Node<D> = null;
 
     /**
-     * The last node of the `LinkedList()`.
+     * The last node of the `LinkedList`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      */
-    tail: LinkedListNode<D> = null;
+    tail: Node<D> = null;
 
     /**
      * The internal length counter that will be linked to by the `length` getter
@@ -60,8 +60,8 @@ class LinkedList<D extends unknown = number> {
     #__length = 0;
 
     /**
-     * The `Comparator()` instance that powers all comparison tasks of this
-     * `LinkedList()`.
+     * The `Comparator` instance that powers all comparison tasks of this
+     * `LinkedList`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      */
@@ -69,7 +69,7 @@ class LinkedList<D extends unknown = number> {
 
     /**
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
-     * @param compareFunction The compare function that will be passed to a `Comparator()`.
+     * @param compareFunction The compare function that will be passed to a `Comparator`.
      */
     constructor(options?: LinkedListConstructorOptions<D>) {
         this.#__compare = new Comparator((options ?? {}).compareFunction);
@@ -88,7 +88,7 @@ class LinkedList<D extends unknown = number> {
     }
 
     /**
-     * Checks if the `LinkedList` does not contain any `LinkedListNode`s. In
+     * Checks if the `LinkedList` does not contain any `Node`s. In
      * other words returns a boolean that indicates wether or not the
      * `LinkedList` is empty.
      *
@@ -100,15 +100,15 @@ class LinkedList<D extends unknown = number> {
     }
 
     /**
-     * Adds a node to the start of the ``LinkedList()``.
+     * Adds a node to the start of the `LinkedList`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
-     * @param data A piece of data that will be held by the `LinkedListNode()`
+     * @param data A piece of data that will be held by the `Node`
      * @timecomplexity ``O(1)``
      * @returns The `LinkedList` instance
      */
     prepend(data: D): this {
-        const newNode = new LinkedListNode(data, this.head);
+        const newNode = new Node(data, this.head);
         this.head = newNode;
 
         if (!this.tail) {
@@ -121,19 +121,21 @@ class LinkedList<D extends unknown = number> {
     }
 
     /**
-     * Adds a node to the end of the ``LinkedList()``.
+     * Adds a node to the end of the `LinkedList`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
-     * @param data A piece of data that will be held by the `LinkedListNode()`
+     * @param data A piece of data that will be held by the `Node`
      * @timecomplexity ``O(1)``
      * @returns The `LinkedList` instance
      */
     append(data: D): this {
-        const newNode = new LinkedListNode(data);
+        const newNode = new Node(data);
 
         if (!this.head) {
             this.head = newNode;
             this.tail = newNode;
+
+            this.#__length++;
 
             return this;
         }
@@ -150,11 +152,11 @@ class LinkedList<D extends unknown = number> {
      * Removes all nodes that hold the same data passed as an argument.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
-     * @param data A piece of data that the `LinkedListNode()` will be checked against
+     * @param data A piece of data that the `Node` will be checked against
      * @timecomplexity `O(n)`
-     * @returns The deleted `LinkedListNode`
+     * @returns The deleted `Node`
      */
-    delete(data: D): LinkedListNode<D> {
+    delete(data: D): Node<D> {
         if (!this.head) {
             return null;
         }
@@ -196,18 +198,12 @@ class LinkedList<D extends unknown = number> {
      * Removes all nodes that hold the same data passed as an argument.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
-     * @param data A piece of data that the `LinkedListNode()` will be checked against
+     * @param data A piece of data that the `Node` will be checked against
      * @param callback A function that can filter the results
      * @timecomplexity `O(n)`
      * @returns The seeked data, or if it could not find anything `null`
      */
-    find({
-        data,
-        callback,
-    }: {
-        data: D;
-        callback: (data: D) => boolean;
-    }): LinkedListNode<D> | null | D {
+    find({ data, callback }: { data?: D; callback?: (data: D) => boolean }): Node<D> | D {
         if (!this.head) {
             return null;
         }
@@ -230,13 +226,13 @@ class LinkedList<D extends unknown = number> {
     }
 
     /**
-     * Deletes the last node on the `LinkedList()`.
+     * Deletes the last node on the `LinkedList`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @timecomplexity `O(n)`
-     * @returns The deleted `LinkedListNode`
+     * @returns The deleted `Node`
      */
-    deleteTail(): LinkedListNode<D> {
+    deleteTail(): Node<D> {
         const deletedTail = this.tail;
 
         if (this.head === this.tail) {
@@ -264,13 +260,13 @@ class LinkedList<D extends unknown = number> {
     }
 
     /**
-     * Deletes the first node on the `LinkedList()`.
+     * Deletes the first node on the `LinkedList`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @timecomplexity `O(1)`
-     * @returns The deleted `LinkedListNode`
+     * @returns The deleted `Node`
      */
-    deleteHead(): LinkedListNode<D> {
+    deleteHead(): Node<D> {
         if (!this.head) {
             return null;
         }
@@ -290,7 +286,7 @@ class LinkedList<D extends unknown = number> {
     }
 
     /**
-     * Converts the an `Array()` to a `LinkedList()`.
+     * Converts the an `Array()` to a `LinkedList`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @param data An array containing the correct type of data
@@ -304,19 +300,22 @@ class LinkedList<D extends unknown = number> {
     }
 
     /**
-     * Converts the `LinkedList()` to an `Array()`.
+     * Converts the `LinkedList` to an `Array()`.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
-     * @timecomplexity ``O(n)``
+     * @param dataOnly Specifies if only the data of the `Nodes` should be put into the array
+     * @timecomplexity `O(n)`
      * @returns The `LinkedList` as an array
      */
-    toArray(): LinkedListNode<D>[] {
+    toArray(dataOnly?: boolean): Node<D>[] {
         const nodes = [];
 
         let currentNode = this.head;
 
         while (currentNode) {
-            nodes.push(currentNode);
+            if (dataOnly) nodes.push(currentNode.data);
+            else nodes.push(currentNode);
+
             currentNode = currentNode.child;
         }
 
@@ -324,7 +323,7 @@ class LinkedList<D extends unknown = number> {
     }
 
     /**
-     * Converts the `LinkedList()` to an string.
+     * Converts the `LinkedList` to an string.
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @timecomplexity ``O(n)``
@@ -337,7 +336,7 @@ class LinkedList<D extends unknown = number> {
     }
 
     /**
-     * Reverses the order of the `LinkedList()`
+     * Reverses the order of the `LinkedList`
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @timecomplexity ``O(n)``

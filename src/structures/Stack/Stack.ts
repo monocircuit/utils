@@ -110,7 +110,22 @@ class Stack<D extends unknown = number> {
      * @returns An array containing the elements of the `Stack`
      */
     toArray(): D[] {
-        return this.#__linkedList.toArray().map(linkedListNode => linkedListNode.data);
+        return this.#__linkedList.toArray().map(Node => Node.data);
+    }
+
+    /**
+     * Prepends an array to the `Stack` instance.
+     *
+     * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
+     * @param data An array of data that will be put on the `Stack`
+     * @returns The `Stack` instance
+     */
+    fromArray(data: D[]): this {
+        for (let i = data.length - 1; i >= 0; i--) {
+            this.push(data[i]);
+        }
+
+        return this;
     }
 
     /**

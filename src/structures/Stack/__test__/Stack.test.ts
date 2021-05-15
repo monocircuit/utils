@@ -38,3 +38,12 @@ test("stack.toString()", () => {
     stack.push(2);
     expect(stack.toString()).toBe("2,3");
 });
+
+test("stack.fromArray()", () => {
+    expect(stack.fromArray([1, 2, 3]).toArray()).toStrictEqual([1, 2, 3, 2, 3]);
+});
+
+test("stack.constructor.fromArray()", () => {
+    const stack = new Stack({ array: [1, 2, 3] });
+    expect(stack.toArray()).toStrictEqual([1, 2, 3]);
+});

@@ -83,6 +83,7 @@ class Queue<D extends unknown = number> {
      *
      * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
      * @param data A piece of data that will be held by the element in the `Queue`
+     * @returns The `Queue` instance
      */
     enqueue(data: D): this {
         this.#__linkedList.append(data);
@@ -111,7 +112,21 @@ class Queue<D extends unknown = number> {
      * @returns An array containing the elements of the `Queue`
      */
     toArray(): D[] {
-        return this.#__linkedList.toArray().map(linkedListNode => linkedListNode.data);
+        return this.#__linkedList.toArray().map(Node => Node.data);
+    }
+
+    /**
+     * Appends an array to the `Queue` instance. This is done using the
+     * `fromArray()` method of the `LinkedList`.
+     *
+     * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
+     * @param data An array of data that will be enqueued
+     * @returns The `Queue` instance
+     */
+    fromArray(data: D[]): this {
+        this.#__linkedList.fromArray(data);
+
+        return this;
     }
 
     /**
