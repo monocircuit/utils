@@ -1,0 +1,17 @@
+# Ignores all development and configuration files
+tslint.json
+tsconfig.json
+rollup.config.ts
+CONTRIBUTING.md
+code-of-conduct.md
+.travis.yml
+.gitignore
+.editorconfig
+
+# Ignores all development and configuration directories
+.vscode/
+.github/
+.rpt2_cache/
+tools/
+src/
+coverage/
