@@ -3,7 +3,6 @@
  * true, false or a neutral (equal) state depending on the input given.
  *
  * @format
- * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
  * @param V The type of the two parameter values
  */
 export type CompareFunction<V extends unknown = number | string> = (x: V, y: V) => -1 | 0 | 1
@@ -11,8 +10,6 @@ export type CompareFunction<V extends unknown = number | string> = (x: V, y: V) 
 /**
  * An abstraction of the common compare operations. It enables more complex
  * comparisons via a custom compare function.
- *
- * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
  */
 class Comparator<V extends unknown = number | string> {
   /**
@@ -20,7 +17,6 @@ class Comparator<V extends unknown = number | string> {
    * numbers. For more complex values a custom comparison function needs to be
    * passed.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param x The second comparison subject
    * @param y The second comparison subject
    * @returns A numeric value indicating the comparison result
@@ -33,13 +29,10 @@ class Comparator<V extends unknown = number | string> {
 
   /**
    * The compare function all other operations will be based on.
-   *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    */
   private __compare: CompareFunction<V>
 
   /**
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param compareFunction An optional custom compare function
    */
   constructor(compareFunction?: CompareFunction<V>) {
@@ -50,7 +43,6 @@ class Comparator<V extends unknown = number | string> {
    * Checks if the two arguments passed into the method are equal to each
    * other. This is completely dependend of the specified comparison function.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param x The second comparison subject
    * @param y The second comparison subject
    * @returns A value indicating the result of the operation
@@ -63,7 +55,6 @@ class Comparator<V extends unknown = number | string> {
    * Checks if the two arguments passed into the method are less than each
    * other. This is completely dependend of the specified comparison function.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param x The second comparison subject
    * @param y The second comparison subject
    * @returns A value indicating the result of the operation
@@ -76,7 +67,6 @@ class Comparator<V extends unknown = number | string> {
    * Checks if the two arguments passed into the method are greater than each
    * other. This is completely dependend of the specified comparison function.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param x The second comparison subject
    * @param y The second comparison subject
    * @returns A value indicating the result of the operation
@@ -90,7 +80,6 @@ class Comparator<V extends unknown = number | string> {
    * to each other. This is completely dependend of the specified comparison
    * function.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param x The second comparison subject
    * @param y The second comparison subject
    * @returns A value indicating the result of the operation
@@ -104,7 +93,6 @@ class Comparator<V extends unknown = number | string> {
    * equal to each other. This is completely dependend of the specified
    * comparison function.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param x The second comparison subject
    * @param y The second comparison subject
    * @returns A value indicating the result of the operation
@@ -116,8 +104,6 @@ class Comparator<V extends unknown = number | string> {
   /**
    * Reverses the comparison function in a way that the two passed arguments
    * are switched.
-   *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    */
   reverse() {
     const originalCompareFunction = this.__compare

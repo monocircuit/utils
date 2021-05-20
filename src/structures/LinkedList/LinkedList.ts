@@ -5,23 +5,18 @@ import Comparator, { CompareFunction } from '../../others/Comparator/Comparator'
  * A representation of options that can be passed to the `LinkedList`
  * constructor.
  *
- * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
  * @param D The type of data that will be stored in the `LinkedList`
  */
 type LinkedListConstructorOptions<D extends unknown = number> = Partial<{
   /**
    * A custom compare function that will be used to make comparisons to the
    * objects stored in the `LinkedList`.
-   *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    */
   compareFunction: CompareFunction<D>
 
   /**
    * An array that will be put in the form of a `LinkedList` and used as an
    * initial value of the instance.
-   *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    */
   array: Array<D>
 }>
@@ -30,42 +25,32 @@ type LinkedListConstructorOptions<D extends unknown = number> = Partial<{
  * A linear data structure that is build in a fashion that mostly exposes a
  * BigO notation of `O(n)`
  *
- * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
  * @spacecomplexity `O(n)`
  */
 class LinkedList<D extends unknown = number> {
   /**
    * The first node of the `LinkedList`.
-   *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    */
   head: Node<D> | null = null
 
   /**
    * The last node of the `LinkedList`.
-   *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    */
   tail: Node<D> | null = null
 
   /**
    * The internal length counter that will be linked to by the `length` getter
    * property of `LinkedList`.
-   *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    */
   private __length = 0
 
   /**
    * The `Comparator` instance that powers all comparison tasks of this
    * `LinkedList`.
-   *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    */
   private __compare: Comparator<D>
 
   /**
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param compareFunction The compare function that will be passed to a `Comparator`.
    */
   constructor(options?: LinkedListConstructorOptions<D>) {
@@ -77,8 +62,6 @@ class LinkedList<D extends unknown = number> {
   /**
    * The length of the `LinkedList`. Behaves exactly like the `length`
    * property of an array.
-   *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    */
   get length(): number {
     return this.__length
@@ -89,7 +72,6 @@ class LinkedList<D extends unknown = number> {
    * other words returns a boolean that indicates wether or not the
    * `LinkedList` is empty.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @returns A boolean that indicates wether or not the `LinkedList` is empty
    */
   isEmpty(): boolean {
@@ -99,7 +81,6 @@ class LinkedList<D extends unknown = number> {
   /**
    * Adds a node to the start of the `LinkedList`.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param data A piece of data that will be held by the `Node`
    * @timecomplexity ``O(1)``
    * @returns The `LinkedList` instance
@@ -120,7 +101,6 @@ class LinkedList<D extends unknown = number> {
   /**
    * Adds a node to the end of the `LinkedList`.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param data A piece of data that will be held by the `Node`
    * @timecomplexity ``O(1)``
    * @returns The `LinkedList` instance
@@ -148,7 +128,6 @@ class LinkedList<D extends unknown = number> {
   /**
    * Removes all nodes that hold the same data passed as an argument.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param data A piece of data that the `Node` will be checked against
    * @timecomplexity `O(n)`
    * @returns The deleted `Node`
@@ -194,7 +173,6 @@ class LinkedList<D extends unknown = number> {
   /**
    * Removes all nodes that hold the same data passed as an argument.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param data A piece of data that the `Node` will be checked against
    * @param callback A function that can filter the results
    * @timecomplexity `O(n)`
@@ -225,7 +203,6 @@ class LinkedList<D extends unknown = number> {
   /**
    * Deletes the last node on the `LinkedList`.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @timecomplexity `O(n)`
    * @returns The deleted `Node`
    */
@@ -263,7 +240,6 @@ class LinkedList<D extends unknown = number> {
   /**
    * Deletes the first node on the `LinkedList`.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @timecomplexity `O(1)`
    * @returns The deleted `Node`
    */
@@ -289,7 +265,6 @@ class LinkedList<D extends unknown = number> {
   /**
    * Converts the an `Array()` to a `LinkedList`.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param data An array containing the correct type of data
    * @timecomplexity ``O(n)``
    * @returns The `LinkedList` instance
@@ -303,7 +278,6 @@ class LinkedList<D extends unknown = number> {
   /**
    * Converts the `LinkedList` to an `Array()`.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @param dataOnly Specifies if only the data of the `Nodes` should be put into the array
    * @timecomplexity `O(n)`
    * @returns The `LinkedList` as an array
@@ -326,7 +300,6 @@ class LinkedList<D extends unknown = number> {
   /**
    * Converts the `LinkedList` to an string.
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @timecomplexity ``O(n)``
    * @returns The `LinkedList` as a string
    */
@@ -339,7 +312,6 @@ class LinkedList<D extends unknown = number> {
   /**
    * Reverses the order of the `LinkedList`
    *
-   * @author lukasdiegelmann <lukas.j.diegelmann@gmail.com>
    * @timecomplexity ``O(n)``
    * @returns The `LinkedList` instance
    */
