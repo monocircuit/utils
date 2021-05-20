@@ -27,7 +27,7 @@ jobs:
         run: npm install
 
       - name: Run Tests
-        run: npm t
+        run: npx jest
 
       - name: Run Build
         run: npm run build
