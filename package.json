@@ -1,6 +1,6 @@
 {
   "name": "@monocircuit/utils",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "A repository that contains data structures, algorithms and more.",
   "keywords": [
     "Utils",
